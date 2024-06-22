@@ -1,11 +1,11 @@
 package com.example.todo_ui
 
-
+import io.flutter.embedding.android.FlutterActivity
 
 class MainActivity: FlutterActivity() {
-    // Class implementation
+    // Your code here
 }
 
-open class FlutterActivity {
-
+open class MyCustomFlutterActivity {
+    // Your custom FlutterActivity implementation
 }
