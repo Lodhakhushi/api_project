@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todo_ui/presentation/screen/home/homepage.dart';
-import 'package:todo_ui/presentation/screen/on_board/login_in_page.dart';
 
+import '../home/homepage.dart';
+import '../on_board/login_in_page.dart';
 import '../on_board/verification_codePage.dart';
 
 class Splash_Page extends StatefulWidget {

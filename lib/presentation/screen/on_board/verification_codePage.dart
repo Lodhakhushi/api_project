@@ -1,11 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todo_ui/app_widgets/app_custom_Button.dart';
-import 'package:todo_ui/presentation/screen/home/homepage.dart';
-import 'package:todo_ui/presentation/screen/on_board/mobile_verification.dart';
-
-import '../../../app_widgets/app_custom_Text_Field.dart';
+import '../../../app_widgets/app_custom_Button.dart';
+import '../home/homepage.dart';
+import 'mobile_verification.dart';
 
 class VerficationCodePage extends StatefulWidget {
   static const String PREF_USER_ID = "uid";

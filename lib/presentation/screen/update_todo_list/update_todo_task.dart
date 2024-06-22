@@ -3,10 +3,10 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todo_ui/app_widgets/app_custom_Button.dart';
-import 'package:todo_ui/app_widgets/app_custom_Text_Field.dart';
-import 'package:todo_ui/model/task_model.dart';
-import 'package:todo_ui/presentation/screen/on_board/login_in_page.dart';
+import '../../../app_widgets/app_custom_Button.dart';
+import '../../../app_widgets/app_custom_Text_Field.dart';
+import '../../../model/task_model.dart';
+import '../on_board/login_in_page.dart';
 
 class UpdateToDoTask extends StatefulWidget {
   final TaskModel task;

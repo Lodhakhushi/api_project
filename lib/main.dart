@@ -1,7 +1,6 @@
+import 'package:Todo/presentation/screen/splash_page/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_ui/presentation/screen/add_todo_list/add_todo_task.dart';
-import 'package:todo_ui/presentation/screen/splash_page/splash_screen.dart';
 import 'firebase_options.dart';
 
 void main() async{

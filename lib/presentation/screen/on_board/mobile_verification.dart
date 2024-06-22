@@ -1,8 +1,7 @@
+import 'package:Todo/presentation/screen/on_board/verification_codePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_ui/app_widgets/app_custom_Button.dart';
-import 'package:todo_ui/presentation/screen/on_board/verification_codePage.dart';
-
+import '../../../app_widgets/app_custom_Button.dart';
 import '../../../app_widgets/app_custom_Text_Field.dart';
 
 class MobileVerificationPage extends StatefulWidget {
