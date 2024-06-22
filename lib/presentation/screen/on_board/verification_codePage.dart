@@ -142,7 +142,7 @@ class _VerficationCodePageState extends State<VerficationCodePage> {
             .signInWithCredential(credential);
 
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('User logged in: ${cred.user!.uid}'))
+            SnackBar(content: Text('User logged in'))
         );
 
         SharedPreferences prefs = await SharedPreferences.getInstance();
