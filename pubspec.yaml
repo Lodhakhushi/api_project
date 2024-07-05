@@ -80,6 +80,8 @@ flutter:
     - assets/icons/edit_task.png
     - assets/icons/reload.png
     - assets/icons/mobile_otp.png
+    - assets/logo/app_logo.png
+    - assets/images/nodata-found.jpg
 
   #   - images/a_dot_ham.jpeg
 

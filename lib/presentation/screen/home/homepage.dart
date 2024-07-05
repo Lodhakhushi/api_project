@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../model/task_model.dart';
@@ -106,6 +107,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     mUsers = firestore.collection('users').doc(uid).collection('tasks');
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           'Your Tasks',
@@ -145,8 +147,10 @@ class _HomePageState extends State<HomePage> {
 
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                   return Center(
-                    child: Text('No tasks available.'),
+                    child: Image.asset('assets/images/nodata-found.jpg')
                   );
+
+
                 }
 
                 return Padding(

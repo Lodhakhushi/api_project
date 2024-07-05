@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,6 +8,9 @@ import 'mobile_verification.dart';
 
 class VerficationCodePage extends StatefulWidget {
   static const String PREF_USER_ID = "uid";
+  final int start;
+
+  VerficationCodePage({required this.start});
 
   @override
   State<VerficationCodePage> createState() => _VerficationCodePageState();
@@ -20,8 +24,35 @@ class _VerficationCodePageState extends State<VerficationCodePage> {
   TextEditingController otpController5 = TextEditingController();
   TextEditingController otpController6 = TextEditingController();
 
+  Timer? _timer;
+  late int _start;
+
+  @override
+  void initState() {
+    super.initState();
+    _start = widget.start;
+    startTimer();
+  }
+
+  void startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(oneSec, (Timer timer) {
+      if (_start == 0) {
+        setState(() {
+          timer.cancel();
+        });
+      } else {
+        setState(() {
+          _start--;
+        });
+      }
+    });
+  }
+
+  @override
   void dispose() {
     MobileVerificationPage.mobileController.clear();
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -81,6 +112,25 @@ class _VerficationCodePageState extends State<VerficationCodePage> {
                 TextColor: Colors.black,
                 onTap: verifyOtp,
               ),
+              SizedBox(height: 30.0),
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "Send OTP again in",
+                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                    TextSpan(
+                      text: " 00:$_start",
+                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                    TextSpan(
+                      text: " sec",
+                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -129,13 +179,11 @@ class _VerficationCodePageState extends State<VerficationCodePage> {
 
     if (smsCode.length == 6) {
       try {
-        // Create a PhoneAuthCredential with the code
         PhoneAuthCredential credential = PhoneAuthProvider.credential(
           verificationId: MobileVerificationPage.mverificationId!,
           smsCode: smsCode,
         );
 
-        // Sign the user in (or link) with the credential
         UserCredential cred = await FirebaseAuth.instance
             .signInWithCredential(credential);
 

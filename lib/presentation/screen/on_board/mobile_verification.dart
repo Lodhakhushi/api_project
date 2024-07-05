@@ -1,8 +1,9 @@
-import 'package:Todo/presentation/screen/on_board/verification_codePage.dart';
+import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../../app_widgets/app_custom_Button.dart';
 import '../../../app_widgets/app_custom_Text_Field.dart';
+import 'verification_codePage.dart';
 
 class MobileVerificationPage extends StatefulWidget {
   static TextEditingController mobileController = TextEditingController();
@@ -13,10 +14,34 @@ class MobileVerificationPage extends StatefulWidget {
 }
 
 class _MobileVerificationPageState extends State<MobileVerificationPage> {
+  Timer? _timer;
+  int _start = 30;
+
+  void startTimer() {
+    _start = 30; // Reset to 30 seconds
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(oneSec, (Timer timer) {
+      if (_start == 0) {
+        setState(() {
+          timer.cancel();
+        });
+      } else {
+        setState(() {
+          _start--;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: const Color.fromRGBO(212, 201, 186, 1),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Center(
@@ -38,9 +63,9 @@ class _MobileVerificationPageState extends State<MobileVerificationPage> {
               const SizedBox(height: 20.0),
               Center(
                   child: Image.asset(
-                'assets/icons/mobile_otp.png',
-                height: 150.0,
-              )),
+                    'assets/icons/mobile_otp.png',
+                    height: 150.0,
+                  )),
               const SizedBox(
                 height: 30.0,
               ),
@@ -53,8 +78,7 @@ class _MobileVerificationPageState extends State<MobileVerificationPage> {
               ),
               const Text(
                 'We are here to remember!!',
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
               ),
               const SizedBox(
                 height: 20.0,
@@ -74,42 +98,35 @@ class _MobileVerificationPageState extends State<MobileVerificationPage> {
               ),
               AppCustomtBtn(
                 mTitle: "Get Otp",
-                mBgcolor: const Color.fromRGBO(
-                  226,
-                  203,
-                  90,
-                  1,
-                ),
+                mBgcolor: const Color.fromRGBO(226, 203, 90, 1),
                 TextColor: Colors.black,
                 onTap: () async {
+                  startTimer();
                   await FirebaseAuth.instance.verifyPhoneNumber(
                     phoneNumber:
-                        '+91${MobileVerificationPage.mobileController.text}',
+                    '+91${MobileVerificationPage.mobileController.text}',
                     verificationCompleted: (PhoneAuthCredential credential) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Verfication completed')));
-
+                          SnackBar(content: Text('Verification completed')));
                     },
                     verificationFailed: (FirebaseAuthException e) {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content: Text('Verification failed')));
                     },
                     codeSent: (String verificationId, int? resendToken) {
-                      print(
-                          'SMS send to the number: ${MobileVerificationPage.mobileController.text}');
                       MobileVerificationPage.mverificationId = verificationId;
                       setState(() {});
+
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return VerficationCodePage(start: _start);
+                        },
+                      ));
                     },
                     codeAutoRetrievalTimeout: (String verificationId) {},
                   );
-
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return VerficationCodePage();
-                    },
-                  ));
                 },
-              )
+              ),
             ],
           ),
         ),

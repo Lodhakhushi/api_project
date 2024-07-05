@@ -61,12 +61,13 @@ class _Splash_PageState extends State<Splash_Page> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FlutterLogo(),
-            SizedBox(height: 11),
+            //CircleAvatar(foregroundImage: AssetImage('assets/logo/app_logo.png'),radius: 50.0,),
             Text(
-              'Classico',
-              style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
+              "The future depends on what you do today.",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
             ),
+
           ],
         ),
       ),
