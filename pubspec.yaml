@@ -82,6 +82,7 @@ flutter:
     - assets/icons/mobile_otp.png
     - assets/logo/app_logo.png
     - assets/images/nodata-found.jpg
+    - assets/images/splash_page.png
 
   #   - images/a_dot_ham.jpeg
 

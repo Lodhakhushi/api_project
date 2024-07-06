@@ -57,16 +57,16 @@ class _Splash_PageState extends State<Splash_Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: const Color.fromRGBO(212, 201, 186, 1),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Center(child: Image.asset('assets/images/splash_page.png'))
+            // ImageIcon(AssetImage('assets/images/splash_page.png'),size: 250,color: Colors.white,)
             //CircleAvatar(foregroundImage: AssetImage('assets/logo/app_logo.png'),radius: 50.0,),
-            Text(
-              "The future depends on what you do today.",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
+          
+
 
           ],
         ),
