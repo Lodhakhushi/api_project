@@ -63,8 +63,7 @@ class _Splash_PageState extends State<Splash_Page> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(child: Image.asset('assets/images/splash_page.png'))
-            // ImageIcon(AssetImage('assets/images/splash_page.png'),size: 250,color: Colors.white,)
-            //CircleAvatar(foregroundImage: AssetImage('assets/logo/app_logo.png'),radius: 50.0,),
+
           
 
 
