@@ -14,30 +14,8 @@ class MobileVerificationPage extends StatefulWidget {
 }
 
 class _MobileVerificationPageState extends State<MobileVerificationPage> {
-  Timer? _timer;
-  int _start = 30;
 
-  void startTimer() {
-    _start = 30; // Reset to 30 seconds
-    const oneSec = Duration(seconds: 1);
-    _timer = Timer.periodic(oneSec, (Timer timer) {
-      if (_start == 0) {
-        setState(() {
-          timer.cancel();
-        });
-      } else {
-        setState(() {
-          _start--;
-        });
-      }
-    });
-  }
 
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +79,6 @@ class _MobileVerificationPageState extends State<MobileVerificationPage> {
                 mBgcolor: const Color.fromRGBO(226, 203, 90, 1),
                 TextColor: Colors.black,
                 onTap: () async {
-                  startTimer();
                   await FirebaseAuth.instance.verifyPhoneNumber(
                     phoneNumber:
                     '+91${MobileVerificationPage.mobileController.text}',
@@ -119,7 +96,7 @@ class _MobileVerificationPageState extends State<MobileVerificationPage> {
 
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return VerficationCodePage(start: _start);
+                          return VerficationCodePage();
                         },
                       ));
                     },

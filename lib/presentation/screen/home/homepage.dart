@@ -1,14 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../model/task_model.dart';
 import '../add_todo_list/add_todo_task.dart';
 import '../on_board/login_in_page.dart';
 import '../update_todo_list/update_todo_task.dart';
-
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -103,6 +101,19 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  int getPriorityValue(String priority) {
+    switch (priority) {
+      case 'High':
+        return 3;
+      case 'Medium':
+        return 2;
+      case 'Low':
+        return 1;
+      default:
+        return 0;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     mUsers = firestore.collection('users').doc(uid).collection('tasks');
@@ -147,19 +158,25 @@ class _HomePageState extends State<HomePage> {
 
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                   return Center(
-                    child: Image.asset('assets/images/nodata-found.jpg')
-                  );
-
-
+                      child: Image.asset('assets/images/nodata-found.jpg'));
                 }
+
+                // Sort the tasks based on priority
+                List<QueryDocumentSnapshot> sortedDocs = snapshot.data!.docs;
+                sortedDocs.sort((a, b) {
+                  String priorityA = a.get('priority');
+                  String priorityB = b.get('priority');
+                  return getPriorityValue(priorityB)
+                      .compareTo(getPriorityValue(priorityA));
+                });
 
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ListView.builder(
-                    itemCount: snapshot.data!.size,
+                    itemCount: sortedDocs.length,
                     itemBuilder: (context, index) {
-                      Map<String, dynamic> data = snapshot.data!.docs[index]
-                          .data() as Map<String, dynamic>;
+                      Map<String, dynamic> data =
+                          sortedDocs[index].data() as Map<String, dynamic>;
                       TaskModel eachModel = TaskModel.fromDoc(data);
 
                       var myformat = DateFormat.yMMMMEEEEd();

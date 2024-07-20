@@ -8,9 +8,9 @@ import 'mobile_verification.dart';
 
 class VerficationCodePage extends StatefulWidget {
   static const String PREF_USER_ID = "uid";
-  final int start;
+  //final int start;
 
-  VerficationCodePage({required this.start});
+  //VerficationCodePage({required this.start});
 
   @override
   State<VerficationCodePage> createState() => _VerficationCodePageState();
@@ -24,37 +24,36 @@ class _VerficationCodePageState extends State<VerficationCodePage> {
   TextEditingController otpController5 = TextEditingController();
   TextEditingController otpController6 = TextEditingController();
 
-  Timer? _timer;
-  late int _start;
+  //Timer? _timer;
+  //late int _start;
 
   @override
-  void initState() {
-    super.initState();
-    _start = widget.start;
-    startTimer();
-  }
+  // void initState() {
+  //   super.initState();
+  //   _start = widget.start;
+  //   startTimer();
+  // }
 
-  void startTimer() {
-    const oneSec = Duration(seconds: 1);
-    _timer = Timer.periodic(oneSec, (Timer timer) {
-      if (_start == 0) {
-        setState(() {
-          timer.cancel();
-        });
-      } else {
-        setState(() {
-          _start--;
-        });
-      }
-    });
-  }
-
+  // void startTimer() {
+  //   const oneSec = Duration(seconds: 1);
+  //   _timer = Timer.periodic(oneSec, (Timer timer) {
+  //     if (_start == 0) {
+  //       setState(() {
+  //         timer.cancel();
+  //       });
+  //     } else {
+  //       setState(() {
+  //         _start--;
+  //       });
+  //     }
+  //   });
+  // }
   @override
-  void dispose() {
-    MobileVerificationPage.mobileController.clear();
-    _timer?.cancel();
-    super.dispose();
-  }
+  // void dispose() {
+  //   MobileVerificationPage.mobileController.clear();
+  //   _timer?.cancel();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -113,24 +112,24 @@ class _VerficationCodePageState extends State<VerficationCodePage> {
                 onTap: verifyOtp,
               ),
               SizedBox(height: 30.0),
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "Send OTP again in",
-                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                    ),
-                    TextSpan(
-                      text: " 00:$_start",
-                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                    ),
-                    TextSpan(
-                      text: " sec",
-                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
+              // RichText(
+              //   text: TextSpan(
+              //     children: [
+              //       TextSpan(
+              //         text: "Send OTP again in",
+              //         style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              //       ),
+              //       TextSpan(
+              //         text: " 00:$_start",
+              //         style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              //       ),
+              //       TextSpan(
+              //         text: " sec",
+              //         style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              //       ),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),

@@ -80,6 +80,18 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               TextColor: Colors.black,
               onTap: () async {
+                String name = nameController.text.trim();
+                String email = emailController.text.trim();
+                String password = passwordController.text.trim();
+
+                if (name.isEmpty || email.isEmpty || password.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Please fill in all fields'),
+                    ),
+                  );
+                  return;
+                }
                 try {
                   UserCredential cred =
                       await fireAuth.createUserWithEmailAndPassword(

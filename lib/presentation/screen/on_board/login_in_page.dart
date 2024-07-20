@@ -102,6 +102,17 @@ class _LoginPageState extends State<LoginPage> {
 
               AppCustomtBtn(
                 onTap: () async {
+                  String email = emailController.text.trim();
+                  String password = passwordController.text.trim();
+
+                  if (email.isEmpty || password.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Please fill in all fields'),
+                      ),
+                    );
+                    return;
+                  }
                   try {
                     UserCredential cred =
                         await fireAuth.signInWithEmailAndPassword(

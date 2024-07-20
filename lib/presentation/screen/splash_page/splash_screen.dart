@@ -29,7 +29,7 @@ class _Splash_PageState extends State<Splash_Page> {
 
 
     // Simulating a short delay to display the splash screen
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
 
     if (uid != null) {
       // User is logged in, navigate to HomePage
